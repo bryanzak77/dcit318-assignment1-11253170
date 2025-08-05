@@ -1,56 +1,54 @@
-﻿using System;
+﻿// See https://aka.ms/new-console-template for more information
+using System.Reflection.Metadata.Ecma335;
 
-namespace TicketPriceCalculatorApp
+Console.WriteLine("Please enter your grade (0-100)");
+
+string? gradeInput = Console.ReadLine();
+
+int numericalGrade;
+
+try
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Welcome to the Movie Theater Ticket Price Calculator!");
-            Console.WriteLine("Please enter your age:");
-
-            string? ageInput = Console.ReadLine();
-            int age;
-
-            try
-            {
-                age = Convert.ToInt32(ageInput);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid age (a whole number).");
-                return;
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("The number you entered is too large or too small. Please enter a realistic age.");
-                return;
-            }
-
-            if (age < 0)
-            {
-                Console.WriteLine("Age cannot be negative. Please enter a valid age.");
-                return;
-            }
-
-            const decimal REGULAR_PRICE = 10.00m;
-            const decimal DISCOUNT_PRICE = 7.00m;
-
-            decimal ticketPrice;
-
-            if (age >= 65 || age <= 12)
-            {
-                ticketPrice = DISCOUNT_PRICE;
-            }
-            else
-            {
-                ticketPrice = REGULAR_PRICE;
-            }
-
-            Console.WriteLine($"The ticket price is: GHC{ticketPrice:F2}");
-
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
-        }
-    }
+    numericalGrade = Convert.ToInt32(gradeInput);
 }
+catch (FormatException)
+{
+    Console.WriteLine("PLease enter a valid number between 0 and 100");
+    return;
+}
+catch (OverflowException)
+{
+    Console.WriteLine("The number you entered is too large or too small. Please enter a number between 0 and 100.");
+    return;
+}
+
+if (numericalGrade < 0 ||  numericalGrade > 100)
+{
+    Console.WriteLine("Grade must be between 0 and 100. Try again");
+    return;
+}
+
+string letterGrade;
+
+if (numericalGrade >= 90)
+{
+    letterGrade = "A";
+}
+else if (numericalGrade >= 80)
+{
+    letterGrade = "B";
+}
+else if ((numericalGrade >= 70))
+{
+    letterGrade = "C";
+}
+else if ((numericalGrade >= 60))
+{
+    letterGrade = "D";
+}
+else
+{
+    letterGrade = "F";
+}
+
+Console.WriteLine($"Your letter grade is: {letterGrade}");
